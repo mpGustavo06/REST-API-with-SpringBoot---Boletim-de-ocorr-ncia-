@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DelegaciaWebApiApplication {
+public class MainApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DelegaciaWebApiApplication.class, args);
+		SpringApplication.run(MainApp.class, args);
 	}
 
 }
