@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.br.utfpr.tsi.delegacia.web.api.model.BoletimFurto;
 
 @Repository
-public interface BoletimFurtoRepository extends JpaRepository<BoletimFurto, String> {
+public interface BoletimFurtoRepository extends JpaRepository<BoletimFurto, Integer> {
 
 }
