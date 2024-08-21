@@ -23,5 +23,18 @@ public class Veiculo {
 	private String cor;
 	private String marca;
 	private String tipoVeiculo;
+	
+	public Veiculo() {}
 
+	public Veiculo(String chassi, Placa emplacamento, BoletimFurto envolvidoEm, 
+					int anoFabricacao, String cor, String marca, String tipoVeiculo) 
+	{
+		this.chassi = chassi;
+		this.emplacamento = emplacamento;
+		this.envolvidoEm = envolvidoEm;
+		this.anoFabricacao = anoFabricacao;
+		this.cor = cor;
+		this.marca = marca;
+		this.tipoVeiculo = tipoVeiculo;
+	}
 }

@@ -15,4 +15,15 @@ public class Envolvido {
 	private String email;
 	private String tipoEnvolvimento;
 	private String telefoneContato;
+	
+	public Envolvido() {}
+
+	public Envolvido(String cpf, String nome, String email, String tipoEnvolvimento, String telefoneContato) 
+	{
+		this.cpf = cpf;
+		this.nome = nome;
+		this.email = email;
+		this.tipoEnvolvimento = tipoEnvolvimento;
+		this.telefoneContato = telefoneContato;
+	}
 }
