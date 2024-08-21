@@ -33,8 +33,8 @@ public class BoletimFurto {
 		this.identificador = identificador;
 	}
 	
-	public BoletimFurto(String identificador, Endereco localOcorrido, Veiculo veiculoFurtado, 
-						Envolvido envolvidos, String crime, LocalDate dataOcorrido, String periodoOcorrido) 
+	public BoletimFurto(LocalDate dataOcorrido, Endereco localOcorrido, String crime, Envolvido envolvidos, 
+						String identificador, String periodoOcorrido, Veiculo veiculoFurtado) 
 	{
 		this.identificador = identificador;
 		this.localOcorrido = localOcorrido;
