@@ -38,4 +38,9 @@ public class Veiculo {
 		this.marca = marca;
 		this.tipoVeiculo = tipoVeiculo;
 	}
+
+	public void setPlaca(String codigo) {
+		emplacamento.setCodigo(codigo);
+		setEmplacamento(emplacamento);
+	}
 }

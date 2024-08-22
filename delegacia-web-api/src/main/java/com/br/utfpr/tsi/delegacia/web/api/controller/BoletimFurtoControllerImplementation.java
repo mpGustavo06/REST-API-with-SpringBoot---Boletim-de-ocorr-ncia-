@@ -1,5 +1,6 @@
 package com.br.utfpr.tsi.delegacia.web.api.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,17 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 	}
 
 	@Override
-	public void alterarBoletim(BoletimFurto boletim) {
-		repositoryImplementation.alterarBoletim(boletim);
+	public BoletimFurto alterarBoletim(String identificador, BoletimFurto boletim) {
+		Optional<BoletimFurto> novoBoletim = procurarPorIdentificador(identificador);
+		
+		novoBoletim.get().setCrime(boletim.getCrime());
+		novoBoletim.get().setDataOcorrido(boletim.getDataOcorrido());
+		novoBoletim.get().setEnvolvidos(boletim.getEnvolvidos());
+		novoBoletim.get().setLocalOcorrido(boletim.getLocalOcorrido());
+		novoBoletim.get().setPeriodoOcorrido(boletim.getPeriodoOcorrido());
+		novoBoletim.get().setVeiculoFurtado(boletim.getVeiculoFurtado());
+		
+		return repositoryBoletim.save(novoBoletim.get());
 	}
 
 	@Override
@@ -47,12 +57,12 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 	}
 
 	@Override
-	public List<BoletimFurto> procurarPorCidade(String cidade) {
+	public List<BoletimFurto> procurarPorCidade(String cidade) throws SQLException {
 		return repositoryImplementation.findBoletimByCidade(cidade);
 	}
 
 	@Override
-	public List<BoletimFurto> procurarPorPeriodo(String periodo) {
+	public List<BoletimFurto> procurarPorPeriodo(String periodo) throws SQLException {
 		return repositoryImplementation.findBoletimByPeriodo(periodo);
 	}
 
@@ -62,17 +72,21 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 	}
 
 	@Override
-	public Optional<Veiculo> procurarPorPlaca(Placa placa) {
-		return repositoryImplementation.findVeiculoByPlaca(placa);
+	public Optional<Veiculo> procurarPorPlaca(Placa placa) throws SQLException {
+		return repositoryImplementation.findVeiculoByPlaca(placa.getCodigo());
 	}
 
 	@Override
-	public List<Veiculo> procurarPorCor(String cor) {
+	public List<Veiculo> procurarPorCor(String cor) throws SQLException {
 		return repositoryImplementation.findVeiculoByCor(cor);
 	}
 
 	@Override
-	public List<Veiculo> procurarPorTipo(String tipo) {
+	public List<Veiculo> procurarPorTipo(String tipo) throws SQLException {
 		return repositoryImplementation.findVeiculoByTipo(tipo);
+	}
+	
+	public Optional<Veiculo> procurarPorId(int id) {
+		return repositoryVeiculo.findById(id);
 	}
 }
