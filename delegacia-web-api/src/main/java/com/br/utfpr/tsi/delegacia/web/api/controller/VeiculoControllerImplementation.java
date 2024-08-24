@@ -22,7 +22,7 @@ public class VeiculoControllerImplementation implements VeiculoController
 	}
 
 	@Override
-	public Veiculo procurarPorPlaca(Placa placaCodigo) {
+	public Veiculo procurarPorPlaca(String placaCodigo) {
 		return this.veiculoRepository.procurarPorPlaca(placaCodigo);
 	}
 

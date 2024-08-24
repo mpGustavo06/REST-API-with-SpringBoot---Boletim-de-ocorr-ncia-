@@ -42,7 +42,7 @@ public class VeiculoRepositoryImplementation implements VeiculoRepository
 	}
 
 	@Override
-	public Veiculo procurarPorPlaca(Placa placaCodigo) {
+	public Veiculo procurarPorPlaca(String placaCodigo) {
 		return this.veiculos.get(placaCodigo);
 	}
 

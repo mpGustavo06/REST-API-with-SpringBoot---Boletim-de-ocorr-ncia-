@@ -10,7 +10,7 @@ public interface VeiculoRepository
 	
 	List<Veiculo> listarVeiculos();
 	
-	Veiculo procurarPorPlaca(Placa placaCodigo);
+	Veiculo procurarPorPlaca(String placaCodigo);
 	
 	List<Veiculo> procurarPorCor(String cor);
 	

@@ -23,7 +23,7 @@ public class VeiculoEndpoint {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response listarVeiuculosRoubados(@QueryParam("placa") Placa placa, 
+	public Response listarVeiuculosRoubados(@QueryParam("placa") String placa, 
 											@QueryParam("cor") String cor, 
 											@QueryParam("tipo") String tipo)
 	{
