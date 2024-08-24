@@ -1,8 +1,21 @@
 package com.br.utfpr.tsi.delegacia.web.api.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 import com.br.utfpr.tsi.delegacia.web.api.model.BoletimFurto;
 
-@Repository
-public interface BoletimFurtoRepository extends JpaRepository<BoletimFurto, String>{}
+public interface BoletimFurtoRepository 
+{
+	void cadastrarBoletim(BoletimFurto boletim);
+	
+	void alterarBoletim(BoletimFurto boletim);
+
+	void removerBoletim(String identificador);
+	
+	List<BoletimFurto> listarBoletins();
+	
+	BoletimFurto procurarPorIdentificador(String identificador);
+	
+	List<BoletimFurto> procurarPorCidade(String cidade);
+	
+	List<BoletimFurto> procurarPorPeriodo(String periodo);
+}

@@ -1,10 +1,10 @@
-package com.br.utfpr.tsi.delegacia.web.api.repository;
+package com.br.utfpr.tsi.delegacia.web.api.controller;
 
 import java.util.List;
 import com.br.utfpr.tsi.delegacia.web.api.model.Placa;
 import com.br.utfpr.tsi.delegacia.web.api.model.Veiculo;
 
-public interface VeiculoRepository 
+public interface VeiculoController 
 {
 	void cadastrarVeiculo(Veiculo veiculo);
 	

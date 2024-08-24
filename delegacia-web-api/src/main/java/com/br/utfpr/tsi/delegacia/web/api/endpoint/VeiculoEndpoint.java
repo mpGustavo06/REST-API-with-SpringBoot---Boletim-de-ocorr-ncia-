@@ -1,16 +1,13 @@
 package com.br.utfpr.tsi.delegacia.web.api.endpoint;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.br.utfpr.tsi.delegacia.web.api.controller.BoletimFurtoController;
+import com.br.utfpr.tsi.delegacia.web.api.controller.VeiculoController;
 import com.br.utfpr.tsi.delegacia.web.api.model.Placa;
 import com.br.utfpr.tsi.delegacia.web.api.model.Veiculo;
-
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -21,21 +18,20 @@ import jakarta.ws.rs.core.Response;
 @Component
 @Path("veiculos")
 public class VeiculoEndpoint {
-	
-	@Autowired
-	private BoletimFurtoController boletimFurtoController;
+	@Autowired(required = false)
+	private VeiculoController veiculoController;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listarVeiuculosRoubados(@QueryParam("placa") Placa placa, 
 											@QueryParam("cor") String cor, 
-											@QueryParam("tipo") String tipo) throws SQLException 
+											@QueryParam("tipo") String tipo)
 	{
 		List<Veiculo> selecionados = new ArrayList();
 		
 		if (placa != null) 
 		{
-			Optional<Veiculo> veiculo = boletimFurtoController.procurarPorPlaca(placa);
+			Veiculo veiculo = veiculoController.procurarPorPlaca(placa);
 			try 
 			{
 				return Response.ok(veiculo).build();
@@ -49,19 +45,19 @@ public class VeiculoEndpoint {
 		{
 			if (cor == null && tipo == null) 
 			{
-				selecionados = boletimFurtoController.listarVeiculos();
+				selecionados = veiculoController.listarVeiculos();
 			}
 			else if (cor != null && tipo == null) 
 			{
-				selecionados = boletimFurtoController.procurarPorCor(cor);
+				selecionados = veiculoController.procurarPorCor(cor);
 			}
 			else if (cor == null && tipo != null) 
 			{
-				selecionados = boletimFurtoController.procurarPorTipo(tipo);
+				selecionados = veiculoController.procurarPorTipo(tipo);
 			}
 			else if (cor != null && tipo != null) 
 			{
-				List<Veiculo> cores = boletimFurtoController.procurarPorCor(cor);
+				List<Veiculo> cores = veiculoController.procurarPorCor(cor);
 				
 				for (Veiculo veic : cores) 
 				{

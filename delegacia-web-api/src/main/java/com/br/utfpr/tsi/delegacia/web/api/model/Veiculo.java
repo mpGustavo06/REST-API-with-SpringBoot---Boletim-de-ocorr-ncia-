@@ -1,26 +1,12 @@
 package com.br.utfpr.tsi.delegacia.web.api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
-@Entity
-public class Veiculo {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@OneToOne
+public class Veiculo 
+{
 	private Placa emplacamento;
-	
-	@ManyToOne
 	private BoletimFurto envolvidoEm;
-	
 	private int anoFabricacao;
 	private String cor;
 	private String marca;
@@ -37,10 +23,5 @@ public class Veiculo {
 		this.cor = cor;
 		this.marca = marca;
 		this.tipoVeiculo = tipoVeiculo;
-	}
-
-	public void setPlaca(String codigo) {
-		emplacamento.setCodigo(codigo);
-		setEmplacamento(emplacamento);
-	}
+	}	
 }

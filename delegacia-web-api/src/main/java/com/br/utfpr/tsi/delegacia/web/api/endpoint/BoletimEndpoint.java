@@ -1,9 +1,7 @@
 package com.br.utfpr.tsi.delegacia.web.api.endpoint;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -24,21 +22,20 @@ import jakarta.ws.rs.core.Response;
 @Component
 @Path("boletins")
 public class BoletimEndpoint {
-
 	@Autowired
 	private BoletimFurtoController boletimFurtoController;
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({"application/json"})
 	public Response get(@QueryParam("identificador") String identificador, 
 						@QueryParam("cidade") String cidade, 
-						@QueryParam("periodoOcorrido") String periodoOcorrido) throws SQLException 
+						@QueryParam("periodoOcorrido") String periodoOcorrido) 
 	{
 		List<BoletimFurto> selecionados = new ArrayList();
 		
 		if (identificador != null) 
 		{
-			Optional<BoletimFurto> boletim = boletimFurtoController.procurarPorIdentificador(identificador);
+			BoletimFurto boletim = boletimFurtoController.procurarPorIdentificador(identificador);
 			try 
 			{
 				return Response.ok(boletim).build();
@@ -87,28 +84,49 @@ public class BoletimEndpoint {
 	}
 
 	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({"application/json"})
+	@Consumes({"application/json"})
 	@ResponseStatus(HttpStatus.CREATED)
 	public Response cadastrar(BoletimFurto boletim) 
 	{
-		boletimFurtoController.cadastrarBoletim(boletim);
-		return Response.ok(boletim).build();
+		try 
+		{
+			boletimFurtoController.cadastrarBoletim(boletim);
+			return Response.ok("Cadastrado com sucesso! Identificador: "+boletim.getIdentificador()).build();
+		} 
+		catch (Exception e) 
+		{
+			return Response.status(Response.Status.NOT_IMPLEMENTED).entity(e.getMessage()).build();
+		}
 	}
 	
 	@PUT
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editar(@QueryParam("identificador") String identificador, BoletimFurto boletim)
+	@Produces({"application/json"})
+	@Consumes({"application/json"})
+	public Response editar(BoletimFurto boletim)
 	{
-		BoletimFurto novoBoletim = boletimFurtoController.alterarBoletim(identificador, boletim);
-		return Response.ok(novoBoletim).build();
+		try 
+		{
+			boletimFurtoController.alterarBoletim(boletim);
+			return Response.ok("Alterado com sucesso! Identificador: "+boletim.getIdentificador()).build();
+		} 
+		catch (Exception e) 
+		{
+			return Response.status(Response.Status.NOT_MODIFIED).entity(e.getMessage()).build();
+		}
 	}
 	
 	@DELETE
 	public Response remover(@QueryParam("identificador") String identificador)
 	{
-		boletimFurtoController.removerBoletim(identificador);
-		return Response.ok().build();
+		try 
+		{
+			boletimFurtoController.removerBoletim(identificador);
+			return Response.ok("Removido com sucesso!").build();
+		} 
+		catch (Exception e) 
+		{
+			return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+		}
 	}
 }

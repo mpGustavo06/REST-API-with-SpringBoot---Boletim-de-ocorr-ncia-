@@ -1,92 +1,82 @@
 package com.br.utfpr.tsi.delegacia.web.api.controller;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.br.utfpr.tsi.delegacia.web.api.model.BoletimFurto;
-import com.br.utfpr.tsi.delegacia.web.api.model.Placa;
 import com.br.utfpr.tsi.delegacia.web.api.model.Veiculo;
 import com.br.utfpr.tsi.delegacia.web.api.repository.BoletimFurtoRepository;
-import com.br.utfpr.tsi.delegacia.web.api.repository.RepositoryImplementation;
 import com.br.utfpr.tsi.delegacia.web.api.repository.VeiculoRepository;
 
 @Component
-public class BoletimFurtoControllerImplementation implements BoletimFurtoController {
+public class BoletimFurtoControllerImplementation implements BoletimFurtoController 
+{
 	@Autowired
-	BoletimFurtoRepository repositoryBoletim;
-	
+	private BoletimFurtoRepository boletimRepository;
 	@Autowired
-	VeiculoRepository repositoryVeiculo;
-	
-	RepositoryImplementation repositoryImplementation;
+	private VeiculoRepository veiculoRepository;
 	
 	@Override
 	public void cadastrarBoletim(BoletimFurto boletim) {
-		repositoryBoletim.save(boletim);
+		if (boletim.getIdentificador() == null) 
+		{
+			boletim.setIdentificador(UUID.randomUUID().toString());
+		}
+
+		boletimRepository.cadastrarBoletim(boletim);
+		
+		Veiculo veiculo = boletim.getVeiculoFurtado();
+		veiculo.setEnvolvidoEm(new BoletimFurto(boletim.getIdentificador()));
+		veiculoRepository.cadastrarVeiculo(veiculo);
 	}
 
 	@Override
-	public BoletimFurto alterarBoletim(String identificador, BoletimFurto boletim) {
-		Optional<BoletimFurto> novoBoletim = procurarPorIdentificador(identificador);
-		
-		novoBoletim.get().setCrime(boletim.getCrime());
-		novoBoletim.get().setDataOcorrido(boletim.getDataOcorrido());
-		novoBoletim.get().setEnvolvidos(boletim.getEnvolvidos());
-		novoBoletim.get().setLocalOcorrido(boletim.getLocalOcorrido());
-		novoBoletim.get().setPeriodoOcorrido(boletim.getPeriodoOcorrido());
-		novoBoletim.get().setVeiculoFurtado(boletim.getVeiculoFurtado());
-		
-		return repositoryBoletim.save(novoBoletim.get());
+	public void alterarBoletim(BoletimFurto boletim) {
+		this.boletimRepository.alterarBoletim(boletim);
 	}
 
 	@Override
 	public void removerBoletim(String identificador) {
-		repositoryBoletim.deleteById(identificador);
+		this.boletimRepository.removerBoletim(identificador);
 	}
 
 	@Override
 	public List<BoletimFurto> listarBoletins() {
-		return repositoryBoletim.findAll();
+		List<BoletimFurto> boletins = this.boletimRepository.listarBoletins();
+		
+		for (BoletimFurto boletim : boletins) {
+			boletim.setEnvolvidos(null);
+		}
+		
+		return boletins;
 	}
 
 	@Override
-	public Optional<BoletimFurto> procurarPorIdentificador(String identificador) {
-		return repositoryBoletim.findById(identificador);
+	public BoletimFurto procurarPorIdentificador(String identificador) {
+		return this.boletimRepository.procurarPorIdentificador(identificador);
 	}
 
 	@Override
-	public List<BoletimFurto> procurarPorCidade(String cidade) throws SQLException {
-		return repositoryImplementation.findBoletimByCidade(cidade);
+	public List<BoletimFurto> procurarPorCidade(String cidade) {
+		List<BoletimFurto> boletins = this.boletimRepository.procurarPorCidade(cidade);
+		
+		for (BoletimFurto boletim : boletins) {
+			boletim.setEnvolvidos(null);
+		}
+		
+		return boletins;
 	}
 
 	@Override
-	public List<BoletimFurto> procurarPorPeriodo(String periodo) throws SQLException {
-		return repositoryImplementation.findBoletimByPeriodo(periodo);
-	}
-
-	@Override
-	public List<Veiculo> listarVeiculos() {
-		return repositoryVeiculo.findAll();
-	}
-
-	@Override
-	public Optional<Veiculo> procurarPorPlaca(Placa placa) throws SQLException {
-		return repositoryImplementation.findVeiculoByPlaca(placa.getCodigo());
-	}
-
-	@Override
-	public List<Veiculo> procurarPorCor(String cor) throws SQLException {
-		return repositoryImplementation.findVeiculoByCor(cor);
-	}
-
-	@Override
-	public List<Veiculo> procurarPorTipo(String tipo) throws SQLException {
-		return repositoryImplementation.findVeiculoByTipo(tipo);
-	}
-	
-	public Optional<Veiculo> procurarPorId(int id) {
-		return repositoryVeiculo.findById(id);
+	public List<BoletimFurto> procurarPorPeriodo(String periodo) {
+		List<BoletimFurto> boletins = this.boletimRepository.procurarPorPeriodo(periodo);
+		
+		for (BoletimFurto boletim : boletins) {
+			boletim.setEnvolvidos(null);
+		}
+		
+		return boletins;
 	}
 }
