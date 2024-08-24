@@ -5,17 +5,17 @@ import com.br.utfpr.tsi.delegacia.web.api.model.BoletimFurto;
 
 public interface BoletimFurtoController 
 {
-	void cadastrarBoletim(BoletimFurto boletim);
+	void cadastrarBoletim(BoletimFurto boletim) throws Exception;
 	
 	void alterarBoletim(BoletimFurto boletim);
 
 	void removerBoletim(String identificador);
 	
-	List<BoletimFurto> listarBoletins();
+	List<BoletimFurto> listarBoletins() throws Exception;
 	
-	BoletimFurto procurarPorIdentificador(String identificador);
+	BoletimFurto procurarPorIdentificador(String identificador) throws Exception;
 	
-	List<BoletimFurto> procurarPorCidade(String cidade);
+	List<BoletimFurto> procurarPorCidade(String cidade) throws Exception;
 	
-	List<BoletimFurto> procurarPorPeriodo(String periodo);
+	List<BoletimFurto> procurarPorPeriodo(String periodo) throws Exception;
 }

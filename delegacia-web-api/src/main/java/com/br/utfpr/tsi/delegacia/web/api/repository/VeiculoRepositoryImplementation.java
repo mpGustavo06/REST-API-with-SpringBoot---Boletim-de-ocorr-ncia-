@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.br.utfpr.tsi.delegacia.web.api.controller.CSVLeitor;
 import com.br.utfpr.tsi.delegacia.web.api.model.BoletimFurto;
-import com.br.utfpr.tsi.delegacia.web.api.model.Placa;
 import com.br.utfpr.tsi.delegacia.web.api.model.Veiculo;
 import jakarta.annotation.PostConstruct;
 
@@ -18,11 +16,11 @@ public class VeiculoRepositoryImplementation implements VeiculoRepository
 {
 	@Autowired
 	private CSVLeitor leitor;
-	private Map<String, Veiculo> veiculos = new HashMap();
+	private Map<String, Veiculo> veiculos = new HashMap<>();
 
 	@PostConstruct
 	public void init() {
-		List<BoletimFurto> boletins = new ArrayList(this.leitor.lerCSV().values());
+		List<BoletimFurto> boletins = new ArrayList<>(this.leitor.lerCSV().values());
 
 		for (BoletimFurto boletim : boletins) 
 		{

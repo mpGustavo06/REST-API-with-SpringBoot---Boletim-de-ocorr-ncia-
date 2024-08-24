@@ -7,16 +7,14 @@ public class Envolvido
 {
 	private String nome;
 	private String email;
-	private String tipoEnvolvimento;
-	private String telefoneContato;
+	private String telefone;
 	
 	public Envolvido() {}
 
-	public Envolvido(String nome, String email, String tipoEnvolvimento, String telefoneContato) 
+	public Envolvido(String nome, String email, String telefone) 
 	{
 		this.nome = nome;
 		this.email = email;
-		this.tipoEnvolvimento = tipoEnvolvimento;
-		this.telefoneContato = telefoneContato;
+		this.telefone = telefone;
 	}
 }

@@ -2,7 +2,6 @@ package com.br.utfpr.tsi.delegacia.web.api.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.br.utfpr.tsi.delegacia.web.api.model.Placa;
 import com.br.utfpr.tsi.delegacia.web.api.model.Veiculo;
 import com.br.utfpr.tsi.delegacia.web.api.repository.VeiculoRepository;
 
@@ -17,22 +16,58 @@ public class VeiculoControllerImplementation implements VeiculoController
 	}
 	
 	@Override
-	public List<Veiculo> listarVeiculos() {
-		return this.veiculoRepository.listarVeiculos();
+	public List<Veiculo> listarVeiculos() throws Exception {
+		List<Veiculo> veiculos = this.veiculoRepository.listarVeiculos();
+		
+		if (veiculos.isEmpty() || veiculos == null) 
+		{
+			throw new Exception("Veiculos não encontrados!");
+		}
+		else
+		{
+			return veiculos;
+		}
 	}
 
 	@Override
-	public Veiculo procurarPorPlaca(String placaCodigo) {
-		return this.veiculoRepository.procurarPorPlaca(placaCodigo);
+	public Veiculo procurarPorPlaca(String placaCodigo) throws Exception {
+		Veiculo veiculo = this.veiculoRepository.procurarPorPlaca(placaCodigo);
+		
+		if (veiculo == null) 
+		{
+			throw new Exception("Veiculo não encontrado!");
+		}
+		else
+		{
+			return veiculo;
+		}
 	}
 
 	@Override
-	public List<Veiculo> procurarPorCor(String cor) {
-		return this.veiculoRepository.procurarPorCor(cor);
+	public List<Veiculo> procurarPorCor(String cor) throws Exception {
+		List<Veiculo> veiculos = this.veiculoRepository.procurarPorCor(cor);
+		
+		if (veiculos.isEmpty() || veiculos == null) 
+		{
+			throw new Exception("Veiculos não encontrados!");
+		}
+		else
+		{
+			return veiculos;
+		}
 	}
 
 	@Override
-	public List<Veiculo> procurarPorTipo(String tipo) {
-		return this.veiculoRepository.procurarPorTipo(tipo);
+	public List<Veiculo> procurarPorTipo(String tipo) throws Exception {
+		List<Veiculo> veiculos = this.veiculoRepository.procurarPorTipo(tipo);
+		
+		if (veiculos.isEmpty() || veiculos == null) 
+		{
+			throw new Exception("Veiculos não encontrados!");
+		}
+		else
+		{
+			return veiculos;
+		}
 	}
 }

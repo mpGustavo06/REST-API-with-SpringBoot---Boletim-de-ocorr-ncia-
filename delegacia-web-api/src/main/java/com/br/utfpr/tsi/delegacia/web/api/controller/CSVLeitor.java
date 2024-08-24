@@ -3,8 +3,6 @@ package com.br.utfpr.tsi.delegacia.web.api.controller;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -34,8 +32,6 @@ public class CSVLeitor {
 			List<CSVRecord> registers = parserCSV.getRecords();
 
 			Iterator registerIterator = registers.iterator();
-
-			String a;
 			
 			while (registerIterator.hasNext()) {
 				CSVRecord register = (CSVRecord) registerIterator.next();
@@ -103,10 +99,7 @@ public class CSVLeitor {
 		String rua = record.get("LOGRADOURO");
 		int numero = Integer.parseInt(record.get("NUMERO"));
 		String periodo = record.get("PERIDOOCORRENCIA");
-
-		String stringDataOcorrido = record.get("DATAOCORRENCIA");
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate dataOcorrido = LocalDate.parse(stringDataOcorrido, dtf);
+		String dataOcorrido = record.get("DATAOCORRENCIA");
 
 		Endereco endereco = new Endereco(rua, numero, bairro, cidade, estado);
 		registroCrime.setLocalOcorrido(endereco);

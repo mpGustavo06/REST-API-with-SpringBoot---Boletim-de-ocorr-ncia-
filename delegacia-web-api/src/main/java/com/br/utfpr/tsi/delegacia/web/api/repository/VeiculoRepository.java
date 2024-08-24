@@ -1,7 +1,6 @@
 package com.br.utfpr.tsi.delegacia.web.api.repository;
 
 import java.util.List;
-import com.br.utfpr.tsi.delegacia.web.api.model.Placa;
 import com.br.utfpr.tsi.delegacia.web.api.model.Veiculo;
 
 public interface VeiculoRepository 

@@ -2,11 +2,9 @@ package com.br.utfpr.tsi.delegacia.web.api.endpoint;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.br.utfpr.tsi.delegacia.web.api.controller.VeiculoController;
-import com.br.utfpr.tsi.delegacia.web.api.model.Placa;
 import com.br.utfpr.tsi.delegacia.web.api.model.Veiculo;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -25,9 +23,9 @@ public class VeiculoEndpoint {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listarVeiuculosRoubados(@QueryParam("placa") String placa, 
 											@QueryParam("cor") String cor, 
-											@QueryParam("tipo") String tipo)
+											@QueryParam("tipo") String tipo) throws Exception
 	{
-		List<Veiculo> selecionados = new ArrayList();
+		List<Veiculo> selecionados = new ArrayList<>();
 		
 		if (placa != null) 
 		{

@@ -16,7 +16,6 @@ import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Component
@@ -29,9 +28,9 @@ public class BoletimEndpoint {
 	@Produces({"application/json"})
 	public Response get(@QueryParam("identificador") String identificador, 
 						@QueryParam("cidade") String cidade, 
-						@QueryParam("periodoOcorrido") String periodoOcorrido) 
+						@QueryParam("periodoOcorrido") String periodoOcorrido) throws Exception 
 	{
-		List<BoletimFurto> selecionados = new ArrayList();
+		List<BoletimFurto> selecionados = new ArrayList<>();
 		
 		if (identificador != null) 
 		{
