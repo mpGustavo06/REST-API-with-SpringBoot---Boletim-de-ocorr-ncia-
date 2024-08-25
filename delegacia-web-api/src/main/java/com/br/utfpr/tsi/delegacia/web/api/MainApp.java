@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-
 @SpringBootApplication
 @ComponentScan({"com.br.utfpr.tsi.delegacia.web.api"})
 public class MainApp {	

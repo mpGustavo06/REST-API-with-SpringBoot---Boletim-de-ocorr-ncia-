@@ -31,7 +31,7 @@ public class BoletimFurto
 		this.dataOcorrido = dataOcorrido;
 		this.periodoOcorrido = periodoOcorrido;
 	}
-	
+
 	public boolean isNull() {
 		if (this.identificador == null || this.identificador.equalsIgnoreCase("")) 
 		{

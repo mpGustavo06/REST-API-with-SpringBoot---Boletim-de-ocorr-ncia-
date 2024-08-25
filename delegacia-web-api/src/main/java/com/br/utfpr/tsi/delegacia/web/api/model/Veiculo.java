@@ -23,5 +23,5 @@ public class Veiculo
 		this.cor = cor;
 		this.marca = marca;
 		this.tipoVeiculo = tipoVeiculo;
-	}	
+	}
 }
