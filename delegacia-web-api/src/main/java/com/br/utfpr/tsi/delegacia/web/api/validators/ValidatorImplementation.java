@@ -1,8 +1,13 @@
 package com.br.utfpr.tsi.delegacia.web.api.validators;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,12 +44,13 @@ public class ValidatorImplementation implements Validator
 
 	@Override
 	public boolean verificarDadosObrigatorios(BoletimFurto boletim) {
-		boolean dadosNulos = false;
+		boolean dadosNulos = false; //false = validos | true = invalidos
 
 		List<String> dados = new ArrayList<>();
 		
 		dados.add(boletim.getDataOcorrido());
 		dados.add(boletim.getPeriodoOcorrido());
+		dados.add(boletim.getCrime());
 
 		if (boletim.getLocalOcorrido() != null) 
 		{
@@ -57,7 +63,6 @@ public class ValidatorImplementation implements Validator
 			{
 				dados.add(String.valueOf(numero));
 			}
-			
 			dados.add(boletim.getLocalOcorrido().getRua());
 			dados.add(boletim.getLocalOcorrido().getBairro());
 			dados.add(boletim.getLocalOcorrido().getCidade());
@@ -105,7 +110,7 @@ public class ValidatorImplementation implements Validator
 
 		for (String dado : dados) 
 		{
-			if (dado == null || dado.isEmpty()) 
+			if (dado == null) 
 			{
 				dadosNulos = true;
 				break;
@@ -117,25 +122,59 @@ public class ValidatorImplementation implements Validator
 
 	@Override
 	public boolean verificarEmail(String email) {
-		String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-		return Pattern.matches(regex, email);
+	    boolean isEmailIdValid = false;
+	    if (email != null && email.length() > 0) {
+	        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+	        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+	        Matcher matcher = pattern.matcher(email);
+	        if (matcher.matches()) {
+	            isEmailIdValid = true;
+	        }
+	    }
+	    return isEmailIdValid;
 	}
 
 	@Override
 	public boolean verificarData(String data) {
-		String regex = "^(0?[1-9]|[12][0-9]|3[01])[\\/](0?[1-9]|1[012])[\\/]\\d{4}$";
-		return Pattern.matches(regex, data);
+		String dateFormat = "dd/MM/uuuu";
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateFormat).withResolverStyle(ResolverStyle.STRICT);
+		try 
+		{
+			LocalDate date = LocalDate.parse(data, dtf);
+			return true;
+		} 
+		catch (DateTimeParseException e) 
+		{
+			return false;
+		}
 	}
 
 	@Override
 	public boolean verificarPlaca(String placa) {
-		String regex = "^[A-Za-z]{3}[-]?\\d{4}$";
-		return Pattern.matches(regex, placa);
+		boolean isValid = false;
+	    if (placa != null && placa.length() > 0) {
+	        String expression = "[A-Z]{3}[0-9]{4}";
+	        Pattern pattern = Pattern.compile(expression);
+	        Matcher matcher = pattern.matcher(placa);
+	        if (matcher.matches()) {
+	            isValid = true;
+	        }
+	    }
+	    return isValid;
 	}
 
 	@Override
 	public boolean verificarTelefone(String numeroTelefone) {
-		String regex = "^\\(\\d{2}\\)\\d{4,5}[-]\\d{4}$";
-		return Pattern.matches(regex, numeroTelefone);
+		boolean isValid = false;
+	    if (numeroTelefone != null && numeroTelefone.length() > 0) {
+	        String expression = "^\\(\\d{2}\\)\\d{4,5}[-]\\d{4}$";
+	        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+	        Matcher matcher = pattern.matcher(numeroTelefone);
+	        if (matcher.matches()) {
+	            isValid = true;
+	        }
+	    }
+	    return isValid;
 	}
 }

@@ -37,9 +37,9 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 		{
 			throw new Exception("Digite a data corretamente! Exemplo: 12/12/1212");
 		}
-		else if (validator.verificarPlaca(boletim.getVeiculoFurtado().getEmplacamento().getCodigo())) 
+		else if (!validator.verificarPlaca(boletim.getVeiculoFurtado().getEmplacamento().getCodigo())) 
 		{
-			throw new Exception("Digite o telefone corretamente! Exemplo: AAA1111");
+			throw new Exception("Digite a placa corretamente! Exemplo: AAA1111");
 		}
 		else
 		{
