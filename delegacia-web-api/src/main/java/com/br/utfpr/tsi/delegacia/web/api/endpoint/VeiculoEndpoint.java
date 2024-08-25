@@ -16,7 +16,7 @@ import jakarta.ws.rs.core.Response;
 @Component
 @Path("veiculos")
 public class VeiculoEndpoint {
-	@Autowired(required = false)
+	@Autowired
 	private VeiculoController veiculoController;
 	
 	@GET
@@ -29,10 +29,10 @@ public class VeiculoEndpoint {
 		
 		if (placa != null) 
 		{
-			Veiculo veiculo = veiculoController.procurarPorPlaca(placa);
+			selecionados.add(veiculoController.procurarPorPlaca(placa));
 			try 
 			{
-				return Response.ok(veiculo).build();
+				return Response.ok(selecionados).build();
 			} 
 			catch (Exception e) 
 			{

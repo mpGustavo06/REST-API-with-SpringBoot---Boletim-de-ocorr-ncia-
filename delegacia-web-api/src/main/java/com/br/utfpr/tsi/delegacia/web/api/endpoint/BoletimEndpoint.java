@@ -34,10 +34,10 @@ public class BoletimEndpoint {
 		
 		if (identificador != null) 
 		{
-			BoletimFurto boletim = boletimFurtoController.procurarPorIdentificador(identificador);
+			selecionados.add(boletimFurtoController.procurarPorIdentificador(identificador));
 			try 
 			{
-				return Response.ok(boletim).build();
+				return Response.ok(selecionados).build();
 			} 
 			catch (Exception e) 
 			{

@@ -31,7 +31,7 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 		}
 		else if (!validator.verificarTelefone(boletim.getEnvolvidos().getTelefone())) 
 		{
-			throw new Exception("Digite o telefone corretamente! Exemplo: (00)00000-0000");
+			throw new Exception("Digite o telefone corretamente! Exemplo: (00)00000-0000 ou (00)0000-0000");
 		}
 		else if (!validator.verificarData(boletim.getDataOcorrido().toString())) 
 		{
