@@ -39,7 +39,7 @@ var cadastrar = function (url) {
             $("#message").html("Cadastro realizado! <br> Identificador: " + boletimCadastrado.identificador);
         },
 
-        error: function (xhr, status, error) {
+        error: function (xhr, status, erro) {
             $("#message").empty();
             $("#message").append(xhr.responseText)
         }
@@ -47,7 +47,7 @@ var cadastrar = function (url) {
 };
 
 $(document).ready(function () {
-    $("#cadastrarButton").click(function () {
+    $("#btnCadastrar").click(function () {
         cadastrar("http://localhost:8080/api/boletins");
     });
 }); 

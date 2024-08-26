@@ -1,5 +1,15 @@
-.tableResult{
-    text-align: center; 
-    font-size: 15px; 
+.tableResult {
+    text-align: center;
+    font-size: 13px;
     padding-top: 5px;
+}
+
+#theftTable .material-icons {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#theftTable .material-icons:hover {
+    color: tomato;
+    transition: 0.3s;
 }

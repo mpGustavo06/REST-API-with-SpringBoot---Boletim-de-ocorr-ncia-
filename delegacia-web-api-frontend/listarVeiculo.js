@@ -34,8 +34,12 @@ var listarProcessos = function () {
 
 var listarProcessosFiltro = function () {
     $(".filtrarVeiculos").on('click', function () {
-        if ($(".form-select").val() == 'Escolha um filtro' || $("#filterValue").val() == '') {
+        if ($(".form-select").val() == 'Escolha um filtro' && $("#filterValue").val() == '') {
+            limparTabela();
             alert("Escolha um filtro!");
+        }
+        else if ($(".form-select").val() != 'Escolha um filtro' && $("#filterValue").val() == '') {
+            window.location.reload(true);
         }
         else {
             $.ajax({
@@ -61,7 +65,7 @@ var listarProcessosFiltro = function () {
                 },
                 error: function (xhr, status, error) {
                     $("#message").empty();
-                    $("#message").append('Erro na requisição!')
+                    $("#message").append('Erro ao procurar por '+$(".form-select").val()+': '+$("#filterValue").val()+'!');
                 }
             });
         }
