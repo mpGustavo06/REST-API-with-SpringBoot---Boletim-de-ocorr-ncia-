@@ -1,5 +1,6 @@
 package com.br.utfpr.tsi.delegacia.web.api.repository;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,10 +31,10 @@ public class BoletimFurtoRepositoryImplementation implements BoletimFurtoReposit
 	}
 
 	@Override
-	public void alterarBoletim(BoletimFurto boletim) {
+	public void alterarBoletim(BoletimFurto boletim) throws IOException {
 		for (BoletimFurto bof : memory.values()) 
 		{
-			if (bof.getIdentificador().equals(boletim.getIdentificador())) 
+			if (bof.getIdentificador().equalsIgnoreCase(boletim.getIdentificador())) 
 			{
 				removerBoletim(bof.getIdentificador());
 				cadastrarBoletim(boletim);
@@ -42,8 +43,15 @@ public class BoletimFurtoRepositoryImplementation implements BoletimFurtoReposit
 	}
 
 	@Override
-	public void removerBoletim(String identificador) {
-		this.memory.remove(identificador);
+	public void removerBoletim(String identificador) throws IOException {
+		try 
+		{
+			this.memory.remove(identificador);
+		} 
+		catch (Exception e) 
+		{
+			throw new IOException("Não foi possível remover o registro!");
+		} 
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.br.utfpr.tsi.delegacia.web.api.repository;
 
+import java.io.IOException;
 import java.util.List;
 import com.br.utfpr.tsi.delegacia.web.api.model.BoletimFurto;
 
@@ -7,9 +8,9 @@ public interface BoletimFurtoRepository
 {
 	void cadastrarBoletim(BoletimFurto boletim);
 	
-	void alterarBoletim(BoletimFurto boletim);
+	void alterarBoletim(BoletimFurto boletim) throws IOException;
 
-	void removerBoletim(String identificador);
+	void removerBoletim(String identificador) throws IOException;
 	
 	List<BoletimFurto> listarBoletins();
 	

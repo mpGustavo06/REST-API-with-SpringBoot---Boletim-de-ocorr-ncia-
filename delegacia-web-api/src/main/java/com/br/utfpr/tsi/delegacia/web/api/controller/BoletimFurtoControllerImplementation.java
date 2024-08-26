@@ -1,5 +1,6 @@
 package com.br.utfpr.tsi.delegacia.web.api.controller;
 
+import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,26 +21,26 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 	private Validator validator;
 	
 	@Override
-	public void cadastrarBoletim(BoletimFurto boletim) throws Exception {
+	public void cadastrarBoletim(BoletimFurto boletim) throws IOException {
 		if (validator.verificarDadosObrigatorios(boletim)) 
 		{
-			throw new Exception("Todos as informações são obrigatórias!");
+			throw new IOException("Todos as informações são obrigatórias!");
 		}
 		else if (!validator.verificarEmail(boletim.getEnvolvidos().getEmail())) 
 		{
-			throw new Exception("Digite o e-mail corretamente!");
+			throw new IOException("Digite o e-mail corretamente!");
 		}
 		else if (!validator.verificarTelefone(boletim.getEnvolvidos().getTelefone())) 
 		{
-			throw new Exception("Digite o telefone corretamente! Exemplo: (00)00000-0000 ou (00)0000-0000");
+			throw new IOException("Digite o telefone corretamente! Exemplo: (00)00000-0000 ou (00)0000-0000");
 		}
 		else if (!validator.verificarData(boletim.getDataOcorrido().toString())) 
 		{
-			throw new Exception("Digite a data corretamente! Exemplo: 12/12/1212");
+			throw new IOException("Digite a data corretamente! Exemplo: 12/12/1212");
 		}
 		else if (!validator.verificarPlaca(boletim.getVeiculoFurtado().getEmplacamento().getCodigo())) 
 		{
-			throw new Exception("Digite a placa corretamente! Exemplo: AAA1111");
+			throw new IOException("Digite a placa corretamente! Exemplo: AAA1111");
 		}
 		else
 		{
@@ -57,17 +58,40 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 	}
 
 	@Override
-	public void alterarBoletim(BoletimFurto boletim) {
-		this.boletimRepository.alterarBoletim(boletim);
+	public void alterarBoletim(BoletimFurto boletim) throws IOException {
+		if (validator.verificarDadosObrigatorios(boletim)) 
+		{
+			throw new IOException("Todos as informações são obrigatórias!");
+		}
+		else if (!validator.verificarEmail(boletim.getEnvolvidos().getEmail())) 
+		{
+			throw new IOException("Digite o e-mail corretamente!");
+		}
+		else if (!validator.verificarTelefone(boletim.getEnvolvidos().getTelefone())) 
+		{
+			throw new IOException("Digite o telefone corretamente! Exemplo: (00)00000-0000 ou (00)0000-0000");
+		}
+		else if (!validator.verificarData(boletim.getDataOcorrido().toString())) 
+		{
+			throw new IOException("Digite a data corretamente! Exemplo: 12/12/1212");
+		}
+		else if (!validator.verificarPlaca(boletim.getVeiculoFurtado().getEmplacamento().getCodigo())) 
+		{
+			throw new IOException("Digite a placa corretamente! Exemplo: AAA1111");
+		}
+		else
+		{
+			this.boletimRepository.alterarBoletim(boletim);
+		}
 	}
 
 	@Override
-	public void removerBoletim(String identificador) {
+	public void removerBoletim(String identificador) throws IOException {
 		this.boletimRepository.removerBoletim(identificador);
 	}
 
 	@Override
-	public List<BoletimFurto> listarBoletins() throws Exception {
+	public List<BoletimFurto> listarBoletins() throws IOException {
 		List<BoletimFurto> boletins = this.boletimRepository.listarBoletins();
 		
 		for (BoletimFurto boletim : boletins) {
@@ -76,7 +100,7 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 		
 		if (boletins.isEmpty() || boletins == null) 
 		{
-			throw new Exception("Boletins não encontrados!");
+			throw new IOException("Boletins não encontrados!");
 		}
 		else
 		{
@@ -85,12 +109,12 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 	}
 
 	@Override
-	public BoletimFurto procurarPorIdentificador(String identificador) throws Exception {
+	public BoletimFurto procurarPorIdentificador(String identificador) throws IOException {
 		BoletimFurto boletim = this.boletimRepository.procurarPorIdentificador(identificador);
 		
 		if (boletim == null) 
 		{
-			throw new Exception("Boletim não encontrado!");
+			throw new IOException("Boletim não encontrado!");
 		}
 		else
 		{
@@ -100,7 +124,7 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 	}
 
 	@Override
-	public List<BoletimFurto> procurarPorCidade(String cidade) throws Exception {
+	public List<BoletimFurto> procurarPorCidade(String cidade) throws IOException {
 		List<BoletimFurto> boletins = this.boletimRepository.procurarPorCidade(cidade);
 		
 		for (BoletimFurto boletim : boletins) 
@@ -110,7 +134,7 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 		
 		if (boletins.isEmpty() || boletins == null) 
 		{
-			throw new Exception("Boletins da cidade: ("+cidade+") não encontrados!");
+			throw new IOException("Boletins da cidade: ("+cidade+") não encontrados!");
 		}
 		else
 		{
@@ -119,7 +143,7 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 	}
 
 	@Override
-	public List<BoletimFurto> procurarPorPeriodo(String periodo) throws Exception {
+	public List<BoletimFurto> procurarPorPeriodo(String periodo) throws IOException {
 		List<BoletimFurto> boletins = this.boletimRepository.procurarPorPeriodo(periodo);
 		
 		for (BoletimFurto boletim : boletins) 
@@ -129,7 +153,7 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 		
 		if (boletins.isEmpty() || boletins == null) 
 		{
-			throw new Exception("Boletins do periodo: ("+periodo+") não encontrados!");
+			throw new IOException("Boletins do periodo: ("+periodo+") não encontrados!");
 		}
 		else
 		{

@@ -125,7 +125,7 @@ public class BoletimEndpoint {
 		} 
 		catch (Exception e) 
 		{
-			return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(e.getMessage()).build();
 		}
 	}
 }
