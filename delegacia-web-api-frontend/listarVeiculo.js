@@ -27,7 +27,7 @@ var listarProcessos = function () {
         },
         error: function (xhr, status, error) {
             $("#message").empty();
-            $("#message").append('Erro na requisição!')
+            $("#message").append(xhr.responseText)
         }
     });
 };
