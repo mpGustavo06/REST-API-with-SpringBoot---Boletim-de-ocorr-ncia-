@@ -1,8 +1,6 @@
 package com.br.utfpr.tsi.delegacia.web.api.controller;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -20,17 +18,17 @@ import com.br.utfpr.tsi.delegacia.web.api.model.Veiculo;
 
 @Component
 public class CSVLeitor {
+	@SuppressWarnings({ "rawtypes", "deprecation" })
 	public Map<String, BoletimFurto> lerCSV() {
 		Map<String, BoletimFurto> boletins = new HashMap<>();
-
+		
 		try 
 		{
-			Reader readerCSV = new FileReader("src/main/resources/furtos.csv");
+			Reader readerCSV = new FileReader("C:/furtos.csv");
 
-			@SuppressWarnings("deprecation")
 			CSVParser parserCSV = CSVFormat.TDF.withFirstRecordAsHeader().withQuoteMode(QuoteMode.ALL).parse(readerCSV);
+			
 			List<CSVRecord> registers = parserCSV.getRecords();
-
 			Iterator registerIterator = registers.iterator();
 			
 			while (registerIterator.hasNext()) {
@@ -49,7 +47,8 @@ public class CSVLeitor {
 
 			System.out.println("Boletins processados: " + boletins.size());
 		} 
-		catch (IOException ioe) {
+		catch (IOException ioe) 
+		{
 			System.out.println("Não foi possível abrir o arquivo CSV!");
 		}
 

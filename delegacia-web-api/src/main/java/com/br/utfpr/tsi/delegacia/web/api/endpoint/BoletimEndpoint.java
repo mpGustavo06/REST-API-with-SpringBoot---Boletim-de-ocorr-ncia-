@@ -95,7 +95,7 @@ public class BoletimEndpoint {
 		} 
 		catch (Exception e) 
 		{
-			return Response.status(Response.Status.NOT_IMPLEMENTED).entity(e.getMessage()).build();
+			return Response.status(Response.Status.NO_CONTENT).entity(e.getMessage()).build();
 		}
 	}
 	

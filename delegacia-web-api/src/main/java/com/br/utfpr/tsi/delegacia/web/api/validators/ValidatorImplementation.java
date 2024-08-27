@@ -110,7 +110,7 @@ public class ValidatorImplementation implements Validator
 
 		for (String dado : dados) 
 		{
-			if (dado == null) 
+			if (dado == null || dado == "") 
 			{
 				dadosNulos = true;
 				break;
@@ -154,7 +154,7 @@ public class ValidatorImplementation implements Validator
 	public boolean verificarPlaca(String placa) {
 		boolean isValid = false;
 	    if (placa != null && placa.length() > 0) {
-	        String expression = "[A-Z]{3}[0-9]{4}";
+	        String expression = "[A-Z]{3}[0-9]{1}[A-Z]{1}[0-9]{2}|[A-Z]{3}[0-9]{4}";
 	        Pattern pattern = Pattern.compile(expression);
 	        Matcher matcher = pattern.matcher(placa);
 	        if (matcher.matches()) {
@@ -171,6 +171,28 @@ public class ValidatorImplementation implements Validator
 	        String expression = "^\\(\\d{2}\\)\\d{4,5}[-]\\d{4}$";
 	        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
 	        Matcher matcher = pattern.matcher(numeroTelefone);
+	        if (matcher.matches()) {
+	            isValid = true;
+	        }
+	    }
+	    return isValid;
+	}
+
+	@Override
+	public boolean verificarNumero(String numero) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean verificarAnoFabricacao(int anoFabricacao) {
+		boolean isValid = false;
+		String ano = String.valueOf(anoFabricacao);
+		
+	    if (ano != null && ano.length() > 0) {
+	        String expression = "^\\d{4}$";
+	        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+	        Matcher matcher = pattern.matcher(ano);
 	        if (matcher.matches()) {
 	            isValid = true;
 	        }

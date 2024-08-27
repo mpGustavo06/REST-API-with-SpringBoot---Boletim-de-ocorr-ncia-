@@ -15,4 +15,8 @@ public interface Validator
 	public boolean verificarPlaca(String placa);
 	
 	public boolean verificarTelefone(String numeroTelefone);
+	
+	public boolean verificarNumero(String numero);
+	
+	public boolean verificarAnoFabricacao(int anoFabricacao);
 }

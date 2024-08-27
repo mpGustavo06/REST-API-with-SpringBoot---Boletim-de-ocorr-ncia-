@@ -1,8 +1,5 @@
 package com.br.utfpr.tsi.delegacia.web.api.model;
 
-import lombok.Data;
-
-@Data
 public class BoletimFurto 
 {
 	private String identificador;
@@ -41,5 +38,61 @@ public class BoletimFurto
 		{
 			return false;
 		}
+	}
+
+	public String getIdentificador() {
+		return identificador;
+	}
+
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;
+	}
+
+	public Endereco getLocalOcorrido() {
+		return localOcorrido;
+	}
+
+	public void setLocalOcorrido(Endereco localOcorrido) {
+		this.localOcorrido = localOcorrido;
+	}
+
+	public Veiculo getVeiculoFurtado() {
+		return veiculoFurtado;
+	}
+
+	public void setVeiculoFurtado(Veiculo veiculoFurtado) {
+		this.veiculoFurtado = veiculoFurtado;
+	}
+
+	public Envolvido getEnvolvidos() {
+		return envolvidos;
+	}
+
+	public void setEnvolvidos(Envolvido envolvidos) {
+		this.envolvidos = envolvidos;
+	}
+
+	public String getCrime() {
+		return crime;
+	}
+
+	public void setCrime(String crime) {
+		this.crime = crime;
+	}
+
+	public String getDataOcorrido() {
+		return dataOcorrido;
+	}
+
+	public void setDataOcorrido(String dataOcorrido) {
+		this.dataOcorrido = dataOcorrido;
+	}
+
+	public String getPeriodoOcorrido() {
+		return periodoOcorrido;
+	}
+
+	public void setPeriodoOcorrido(String periodoOcorrido) {
+		this.periodoOcorrido = periodoOcorrido;
 	}
 }

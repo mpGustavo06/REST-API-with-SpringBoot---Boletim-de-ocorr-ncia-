@@ -40,7 +40,11 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 		}
 		else if (!validator.verificarPlaca(boletim.getVeiculoFurtado().getEmplacamento().getCodigo())) 
 		{
-			throw new IOException("Digite a placa corretamente! Exemplo: AAA1111");
+			throw new IOException("Digite a placa corretamente! Exemplo: AAA1111 ou AAA1A11");
+		}
+		else if (!validator.verificarAnoFabricacao(boletim.getVeiculoFurtado().getAnoFabricacao()))
+		{
+			throw new IOException("Digite o ano corretamente! Exemplo: 1111");
 		}
 		else
 		{
@@ -77,7 +81,7 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 		}
 		else if (!validator.verificarPlaca(boletim.getVeiculoFurtado().getEmplacamento().getCodigo())) 
 		{
-			throw new IOException("Digite a placa corretamente! Exemplo: AAA1111");
+			throw new IOException("Digite a placa corretamente! Exemplo: AAA1111 ou AAA1A11");
 		}
 		else
 		{
