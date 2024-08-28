@@ -27,17 +27,17 @@ var cadastrar = function () {
         crime: $("#crime").val(),
         dataOcorrido: $("#data").val(),
         periodoOcorrido: $("#periodo").val()
-    }
+    };
 
     $.ajax({
-        url: "http://localhost:8080/api/boletins",
-        type: "PUT",
+        url: 'http://localhost:8080/api/boletins',
+        type: 'PUT',
         async: true,
-        contentType: "application/json",
+        contentType: 'application/json',
         data: JSON.stringify(boletim),
-        success: function (boletimCadastrado) {
+        success: function (resposta) {
             $("#message").empty();
-            $("#message").append("Alteração realizada! <br> Identificador: " + boletimCadastrado.identificador);
+            $("#message").html("Alteração realizada com sucesso!" + resposta);
         },
         error: function (xhr, status, erro) {
             $("#message").empty();

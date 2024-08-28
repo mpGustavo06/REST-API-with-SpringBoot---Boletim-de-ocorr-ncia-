@@ -16,11 +16,13 @@ var listarProcessos = function () {
             $.each(veiculos, function (index, veic) {
                 var novaLinha =
                     '<tr>' +
-                    '<th class="tableResult">' + veic.emplacamento.codigo + '</th>' +
-                    '<td class="tableResult">' + veic.anoFabricacao+ '</td>' +
-                    '<td class="tableResult">' + veic.cor + '</td>' +
-                    '<td class="tableResult">' + veic.marca + '</td>' +
-                    '<td class="tableResult">' + veic.tipoVeiculo + '</td>' +
+                    '<th class="thResult user-select-all bg-dark">' + veic.emplacamento.codigo + '</th>' +
+                    '<td class="thResult user-select-all bg-dark">' + veic.emplacamento.cidade + '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + veic.emplacamento.estado + '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + veic.anoFabricacao+ '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + veic.cor + '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + veic.marca + '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + veic.tipoVeiculo + '</td>' +
                     '</tr>';
                 $("#carTable tbody:last").after(novaLinha);
             });
@@ -54,11 +56,13 @@ var listarProcessosFiltro = function () {
                     $.each(veiculos, function (index, veic) {
                         var novaLinha =
                             '<tr>' +
-                            '<th class="tableResult">' + veic.emplacamento.codigo + '</th>' +
-                            '<td class="tableResult">' + veic.anoFabricacao+ '</td>' +
-                            '<td class="tableResult">' + veic.cor + '</td>' +
-                            '<td class="tableResult">' + veic.marca + '</td>' +
-                            '<td class="tableResult">' + veic.tipoVeiculo + '</td>' +
+                            '<th class="thResult user-select-all bg-dark">' + veic.emplacamento.codigo + '</th>' +
+                            '<td class="thResult user-select-all bg-dark">' + veic.emplacamento.cidade + '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + veic.emplacamento.estado + '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + veic.anoFabricacao+ '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + veic.cor + '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + veic.marca + '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + veic.tipoVeiculo + '</td>' +
                             '</tr>';
                         $("#carTable tbody:last").after(novaLinha);
                     });

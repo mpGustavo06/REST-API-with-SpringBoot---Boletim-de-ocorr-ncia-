@@ -1,0 +1,61 @@
+#theftTable .thResult {
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: whitesmoke;
+}
+
+#theftTable .thResult:hover {
+    color: rgb(0, 140, 255);
+    transition: 0.3s;
+}
+
+#theftTable th {
+    color: rgba(11, 169, 255, 0.692);
+    font-size: 20px;
+}
+
+#carTable .thResult {
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: whitesmoke;
+}
+
+#carTable .thResult:hover {
+    color: rgb(0, 140, 255);
+    transition: 0.3s;
+}
+
+#carTable th {
+    color: rgba(11, 169, 255, 0.692);
+    font-size: 20px;
+}
+
+#registros .descricao,
+#alterar .descricao {
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+#veiculos .descricao,
+#boletins .descricao {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+#boletins,
+#veiculos,
+#registros,
+#alterar,
+#main{
+    background-color: rgb(97, 112, 135);
+    height: 100vh;
+    width: 100%;
+}

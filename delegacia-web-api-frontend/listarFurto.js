@@ -18,16 +18,16 @@ var listarProcessos = function () {
             $.each(boletins, function (index, bo) {
                 var novaLinha =
                     '<tr>' +
-                    '<th class="tableResult">' + bo.identificador + '</th>' +
-                    '<td class="tableResult">' + bo.crime + '</td>' +
-                    '<td class="tableResult">' + bo.dataOcorrido + '</td>' +
-                    '<td class="tableResult">' + bo.periodoOcorrido + '</td>' +
-                    '<td class="tableResult">' + bo.localOcorrido.cidade + '</td>' +
-                    '<td class="tableResult">' + bo.localOcorrido.estado + '</td>' +
-                    '<td class="tableResult">' + bo.veiculoFurtado.marca + '</td>' +
-                    '<td class="tableResult">' + bo.veiculoFurtado.tipoVeiculo + '</td>' +
-                    '<td class="tableResult">' + bo.veiculoFurtado.emplacamento.codigo + '</td>' +
-                    '<td class="tableResult">' + bo.veiculoFurtado.cor + '</td>' +
+                    '<th class="thResult user-select-all bg-dark">' + bo.identificador + '</th>' +
+                    '<td class="thResult user-select-all bg-dark">' + bo.dataOcorrido + '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + bo.periodoOcorrido + '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + bo.localOcorrido.cidade + '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + bo.localOcorrido.estado + '</td>' +
+                    '<td class="thResult user-select-all bg-dark" style="width: 300px;">' + bo.crime + '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + bo.veiculoFurtado.emplacamento.codigo + '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + bo.veiculoFurtado.marca + '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + bo.veiculoFurtado.tipoVeiculo + '</td>' +
+                    '<td class="thResult user-select-all bg-dark">' + bo.veiculoFurtado.cor + '</td>' +
                     '</tr>';
                 $("#theftTable tbody:last").after(novaLinha);
             });
@@ -60,17 +60,17 @@ var listarProcessosFiltro = function () {
                     limparTabela();
                     $.each(boletins, function (index, bo) {
                         var novaLinha =
-                            '<tr>' +
-                            '<th class="tableResult">' + bo.identificador + '</th>' +
-                            '<td class="tableResult">' + bo.crime + '</td>' +
-                            '<td class="tableResult">' + bo.dataOcorrido + '</td>' +
-                            '<td class="tableResult">' + bo.periodoOcorrido + '</td>' +
-                            '<td class="tableResult">' + bo.localOcorrido.cidade + '</td>' +
-                            '<td class="tableResult">' + bo.localOcorrido.estado + '</td>' +
-                            '<td class="tableResult">' + bo.veiculoFurtado.marca + '</td>' +
-                            '<td class="tableResult">' + bo.veiculoFurtado.tipoVeiculo + '</td>' +
-                            '<td class="tableResult">' + bo.veiculoFurtado.emplacamento.codigo + '</td>' +
-                            '<td class="tableResult">' + bo.veiculoFurtado.cor + '</td>' +
+                            '<tr class="trResult">' +
+                            '<th class="thResult user-select-all bg-dark">' + bo.identificador + '</th>' +
+                            '<td class="thResult user-select-all bg-dark">' + bo.dataOcorrido + '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + bo.periodoOcorrido + '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + bo.localOcorrido.cidade + '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + bo.localOcorrido.estado + '</td>' +
+                            '<td class="thResult user-select-all bg-dark" style="width: 300px;">' + bo.crime + '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + bo.veiculoFurtado.emplacamento.codigo + '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + bo.veiculoFurtado.marca + '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + bo.veiculoFurtado.tipoVeiculo + '</td>' +
+                            '<td class="thResult user-select-all bg-dark">' + bo.veiculoFurtado.cor + '</td>' +
                             '</tr>';
                         $("#theftTable tbody:last").after(novaLinha);
                     });
@@ -97,7 +97,7 @@ var deletarBoletim = function () {
             success: function (removido) {
                 $("#message").empty();
                 limparTabela();
-                $("#message").append(removido)
+                $("#message").html(removido)
             },
             error: function (xhr, status, error) {
                 $("#message").empty();

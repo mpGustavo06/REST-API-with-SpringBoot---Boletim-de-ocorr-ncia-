@@ -1,4 +1,4 @@
-var cadastrar = function (url) {
+var cadastrar = function(url) {
     var boletim = {
         localOcorrido: {
             rua: $("#rua").val(),
@@ -26,19 +26,18 @@ var cadastrar = function (url) {
         crime: $("#crime").val(),
         dataOcorrido: $("#data").val(),
         periodoOcorrido: $("#periodo").val()
-    }
+    };
 
     $.ajax({
         url: url,
-        type: "POST",
+        type: 'POST',
         async: true,
-        contentType: "application/json",
+        contentType: 'application/json',
         data: JSON.stringify(boletim),
-        success: function (boletimCadastrado) {
+        success: function (resposta) {
             $("#message").empty();
-            $("#message").html("Cadastro realizado! <br> Identificador: " + boletimCadastrado.identificador);
+            $("#message").html(resposta);
         },
-
         error: function (xhr, status, erro) {
             $("#message").empty();
             $("#message").append(xhr.responseText)
