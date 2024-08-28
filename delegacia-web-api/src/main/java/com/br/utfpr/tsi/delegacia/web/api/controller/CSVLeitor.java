@@ -24,7 +24,7 @@ public class CSVLeitor {
 		
 		try 
 		{
-			Reader readerCSV = new FileReader("C:/furtos.csv");
+			Reader readerCSV = new FileReader("/furtos.csv");
 
 			CSVParser parserCSV = CSVFormat.TDF.withFirstRecordAsHeader().withQuoteMode(QuoteMode.ALL).parse(readerCSV);
 			
@@ -50,6 +50,7 @@ public class CSVLeitor {
 		catch (IOException ioe) 
 		{
 			System.out.println("Não foi possível abrir o arquivo CSV!");
+			System.out.println("Favor adicionar o arquivo furtos.csv que se encontra na pasta src/main/resources no diretório C:/");
 		}
 
 		return boletins;

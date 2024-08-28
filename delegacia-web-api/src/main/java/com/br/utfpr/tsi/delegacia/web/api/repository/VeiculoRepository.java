@@ -7,6 +7,10 @@ public interface VeiculoRepository
 {
 	void cadastrarVeiculo(Veiculo veiculo);
 	
+	boolean alterarVeiculo(Veiculo veiculo);
+	
+	void removerVeiculo(String placa);
+	
 	List<Veiculo> listarVeiculos();
 	
 	Veiculo procurarPorPlaca(String placaCodigo);

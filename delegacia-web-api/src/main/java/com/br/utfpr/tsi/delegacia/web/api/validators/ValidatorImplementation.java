@@ -1,5 +1,6 @@
 package com.br.utfpr.tsi.delegacia.web.api.validators;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -22,7 +23,7 @@ public class ValidatorImplementation implements Validator
 	private BoletimFurtoRepository repository;
 	
 	@Override
-	public String verificadorIdentificador() {
+	public String verificadorIdentificador() throws IOException {
 		boolean aux = true;
 		String identificador = "";
 		
@@ -48,9 +49,10 @@ public class ValidatorImplementation implements Validator
 
 		List<String> dados = new ArrayList<>();
 		
-		dados.add(boletim.getDataOcorrido());
-		dados.add(boletim.getPeriodoOcorrido());
-		dados.add(boletim.getCrime());
+		dados.add(boletim.getDataOcorrido() != null ? boletim.getDataOcorrido() : null);
+		dados.add(boletim.getPeriodoOcorrido() != null ? boletim.getPeriodoOcorrido() : null);
+		dados.add(boletim.getCrime() != null ? boletim.getCrime() : null);
+		
 
 		if (boletim.getLocalOcorrido() != null) 
 		{
@@ -63,11 +65,11 @@ public class ValidatorImplementation implements Validator
 			{
 				dados.add(String.valueOf(numero));
 			}
-			dados.add(boletim.getLocalOcorrido().getRua());
-			dados.add(boletim.getLocalOcorrido().getBairro());
-			dados.add(boletim.getLocalOcorrido().getCidade());
-			dados.add(boletim.getLocalOcorrido().getEstado());
 			
+			dados.add(boletim.getLocalOcorrido().getRua() != null ? boletim.getLocalOcorrido().getRua() : null);
+			dados.add(boletim.getLocalOcorrido().getBairro() != null ? boletim.getLocalOcorrido().getBairro() : null);
+			dados.add(boletim.getLocalOcorrido().getCidade() != null ? boletim.getLocalOcorrido().getCidade() : null);
+			dados.add(boletim.getLocalOcorrido().getEstado() != null ? boletim.getLocalOcorrido().getEstado() : null);
 		}
 		else
 		{
@@ -76,21 +78,30 @@ public class ValidatorImplementation implements Validator
 		
 		if (boletim.getVeiculoFurtado() != null) 
 		{
-			dados.add(String.valueOf(boletim.getVeiculoFurtado().getAnoFabricacao()));
-			dados.add(boletim.getVeiculoFurtado().getCor());
-			dados.add(boletim.getVeiculoFurtado().getMarca());
-			dados.add(boletim.getVeiculoFurtado().getTipoVeiculo());
+			int ano = boletim.getVeiculoFurtado().getAnoFabricacao();
 			
-			if (boletim.getVeiculoFurtado().getEmplacamento() != null) 
-			{
-				dados.add(boletim.getVeiculoFurtado().getEmplacamento().getCodigo());
-				dados.add(boletim.getVeiculoFurtado().getEmplacamento().getCidade());
-				dados.add(boletim.getVeiculoFurtado().getEmplacamento().getEstado());
+			if (ano == 0) {
+				dados.add(null);
 			}
 			else
 			{
-				dados.add(null);
+				dados.add(String.valueOf(ano));
 			}
+			
+			dados.add(boletim.getVeiculoFurtado().getCor() != null ? boletim.getVeiculoFurtado().getCor() : null);
+			dados.add(boletim.getVeiculoFurtado().getMarca() != null ? boletim.getVeiculoFurtado().getMarca() : null);
+			dados.add(boletim.getVeiculoFurtado().getTipoVeiculo() != null ? boletim.getVeiculoFurtado().getTipoVeiculo() : null);
+		}
+		else
+		{
+			dados.add(null);
+		}
+		
+		if (boletim.getVeiculoFurtado().getEmplacamento() != null) 
+		{
+			dados.add(boletim.getVeiculoFurtado().getEmplacamento().getCodigo() != null ? boletim.getVeiculoFurtado().getEmplacamento().getCodigo() : null);
+			dados.add(boletim.getVeiculoFurtado().getEmplacamento().getCidade() != null ? boletim.getVeiculoFurtado().getEmplacamento().getCidade() : null);
+			dados.add(boletim.getVeiculoFurtado().getEmplacamento().getEstado() != null ? boletim.getVeiculoFurtado().getEmplacamento().getEstado() : null);
 		}
 		else
 		{
@@ -99,9 +110,9 @@ public class ValidatorImplementation implements Validator
 		
 		if (boletim.getEnvolvidos() != null) 
 		{
-			dados.add(boletim.getEnvolvidos().getNome());
-			dados.add(boletim.getEnvolvidos().getEmail());
-			dados.add(boletim.getEnvolvidos().getTelefone());
+			dados.add(boletim.getEnvolvidos().getNome() != null ? boletim.getEnvolvidos().getNome() : null);
+			dados.add(boletim.getEnvolvidos().getEmail() != null ? boletim.getEnvolvidos().getEmail() : null);
+			dados.add(boletim.getEnvolvidos().getTelefone() != null ? boletim.getEnvolvidos().getTelefone() : null);
 		}
 		else
 		{
@@ -110,7 +121,7 @@ public class ValidatorImplementation implements Validator
 
 		for (String dado : dados) 
 		{
-			if (dado == null || dado == "") 
+			if (dado == null || dado.isEmpty() || dado == "") 
 			{
 				dadosNulos = true;
 				break;
@@ -179,20 +190,28 @@ public class ValidatorImplementation implements Validator
 	}
 
 	@Override
-	public boolean verificarNumero(String numero) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean verificarAnoFabricacao(int anoFabricacao) {
 		boolean isValid = false;
-		String ano = String.valueOf(anoFabricacao);
-		
-	    if (ano != null && ano.length() > 0) {
+	    if (anoFabricacao > 0) {
+	    	
 	        String expression = "^\\d{4}$";
 	        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-	        Matcher matcher = pattern.matcher(ano);
+	        Matcher matcher = pattern.matcher(String.valueOf(anoFabricacao));
+	        if (matcher.matches()) {
+	            isValid = true;
+	        }
+	    }
+	    return isValid;
+	}
+	
+	@Override
+	public boolean verificarNumero(int numero) {
+		boolean isValid = false;
+	    if (numero > 0) {
+	    	
+	        String expression = "^\\d{1,4}$";
+	        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+	        Matcher matcher = pattern.matcher(String.valueOf(numero));
 	        if (matcher.matches()) {
 	            isValid = true;
 	        }

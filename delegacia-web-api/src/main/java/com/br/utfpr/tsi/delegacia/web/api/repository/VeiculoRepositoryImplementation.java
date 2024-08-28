@@ -73,4 +73,24 @@ public class VeiculoRepositoryImplementation implements VeiculoRepository
 		
 		return veics;
 	}
+
+	@Override
+	public void removerVeiculo(String placa) {
+		this.veiculos.remove(placa);
+	}
+
+	@Override
+	public boolean alterarVeiculo(Veiculo veiculo) {
+		boolean aux = false;
+		for (Veiculo veic : veiculos.values()) 
+		{
+			if (veic.getEmplacamento().getCodigo().equals(veiculo.getEmplacamento().getCodigo())) 
+			{
+				this.removerVeiculo(veic.getEmplacamento().getCodigo());
+				this.cadastrarVeiculo(veiculo);
+				aux = true;
+			}
+		}
+		return aux;
+	}
 }

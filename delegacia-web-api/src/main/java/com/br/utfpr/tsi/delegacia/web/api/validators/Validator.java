@@ -1,10 +1,12 @@
 package com.br.utfpr.tsi.delegacia.web.api.validators;
 
+import java.io.IOException;
+
 import com.br.utfpr.tsi.delegacia.web.api.model.BoletimFurto;
 
 public interface Validator 
 {
-	String verificadorIdentificador();
+	String verificadorIdentificador() throws IOException;
 	
 	public boolean verificarDadosObrigatorios(BoletimFurto boletim);
 	
@@ -15,8 +17,8 @@ public interface Validator
 	public boolean verificarPlaca(String placa);
 	
 	public boolean verificarTelefone(String numeroTelefone);
-	
-	public boolean verificarNumero(String numero);
-	
+
 	public boolean verificarAnoFabricacao(int anoFabricacao);
+	
+	public boolean verificarNumero(int numero);
 }

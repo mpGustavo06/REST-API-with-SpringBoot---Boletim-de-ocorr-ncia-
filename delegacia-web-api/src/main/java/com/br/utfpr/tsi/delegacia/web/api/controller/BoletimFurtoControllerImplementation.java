@@ -21,30 +21,34 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 	private Validator validator;
 	
 	@Override
-	public void cadastrarBoletim(BoletimFurto boletim) throws IOException {
+	public void cadastrarBoletim(BoletimFurto boletim) throws Exception {
 		if (validator.verificarDadosObrigatorios(boletim)) 
 		{
-			throw new IOException("Todos as informações são obrigatórias!");
+			throw new Exception("Todos as informações são obrigatórias!");
 		}
 		else if (!validator.verificarEmail(boletim.getEnvolvidos().getEmail())) 
 		{
-			throw new IOException("Digite o e-mail corretamente!");
+			throw new Exception("Digite o e-mail corretamente!");
 		}
 		else if (!validator.verificarTelefone(boletim.getEnvolvidos().getTelefone())) 
 		{
-			throw new IOException("Digite o telefone corretamente! Exemplo: (00)00000-0000 ou (00)0000-0000");
+			throw new Exception("Digite o telefone corretamente! Exemplo: (00)00000-0000 ou (00)0000-0000");
 		}
 		else if (!validator.verificarData(boletim.getDataOcorrido().toString())) 
 		{
-			throw new IOException("Digite a data corretamente! Exemplo: 12/12/1212");
+			throw new Exception("Digite a data corretamente! Exemplo: 12/12/1212");
 		}
 		else if (!validator.verificarPlaca(boletim.getVeiculoFurtado().getEmplacamento().getCodigo())) 
 		{
-			throw new IOException("Digite a placa corretamente! Exemplo: AAA1111 ou AAA1A11");
+			throw new Exception("Digite a placa corretamente! Exemplo: AAA1111 ou AAA1A11");
 		}
-		else if (!validator.verificarAnoFabricacao(boletim.getVeiculoFurtado().getAnoFabricacao()))
+		else if (!validator.verificarAnoFabricacao(boletim.getVeiculoFurtado().getAnoFabricacao())) 
 		{
-			throw new IOException("Digite o ano corretamente! Exemplo: 1111");
+			throw new Exception("Digite a ano corretamente! Exemplo: 1111");
+		}
+		else if (!validator.verificarNumero(boletim.getLocalOcorrido().getNumero())) 
+		{
+			throw new Exception("Digite a número corretamente! Exemplo: 1, 2, 3... até 9999");
 		}
 		else
 		{
@@ -62,35 +66,52 @@ public class BoletimFurtoControllerImplementation implements BoletimFurtoControl
 	}
 
 	@Override
-	public void alterarBoletim(BoletimFurto boletim) throws IOException {
+	public void alterarBoletim(BoletimFurto boletim) throws Exception {
 		if (validator.verificarDadosObrigatorios(boletim)) 
 		{
-			throw new IOException("Todos as informações são obrigatórias!");
+			throw new Exception("Todos as informações são obrigatórias!");
 		}
 		else if (!validator.verificarEmail(boletim.getEnvolvidos().getEmail())) 
 		{
-			throw new IOException("Digite o e-mail corretamente!");
+			throw new Exception("Digite o e-mail corretamente!");
 		}
 		else if (!validator.verificarTelefone(boletim.getEnvolvidos().getTelefone())) 
 		{
-			throw new IOException("Digite o telefone corretamente! Exemplo: (00)00000-0000 ou (00)0000-0000");
+			throw new Exception("Digite o telefone corretamente! Exemplo: (00)00000-0000 ou (00)0000-0000");
 		}
 		else if (!validator.verificarData(boletim.getDataOcorrido().toString())) 
 		{
-			throw new IOException("Digite a data corretamente! Exemplo: 12/12/1212");
+			throw new Exception("Digite a data corretamente! Exemplo: 12/12/1212");
 		}
 		else if (!validator.verificarPlaca(boletim.getVeiculoFurtado().getEmplacamento().getCodigo())) 
 		{
-			throw new IOException("Digite a placa corretamente! Exemplo: AAA1111 ou AAA1A11");
+			throw new Exception("Digite a placa corretamente! Exemplo: AAA1111 ou AAA1A11");
+		}
+		else if (!validator.verificarAnoFabricacao(boletim.getVeiculoFurtado().getAnoFabricacao())) 
+		{
+			throw new Exception("Digite a ano corretamente! Exemplo: 1111");
+		}
+		else if (!validator.verificarNumero(boletim.getLocalOcorrido().getNumero())) 
+		{
+			throw new Exception("Digite a número corretamente! Exemplo: 1, 2, 3... até 9999");
 		}
 		else
 		{
-			this.boletimRepository.alterarBoletim(boletim);
+			boolean aux = this.veiculoRepository.alterarVeiculo(boletim.getVeiculoFurtado());
+			
+			if (aux) {
+				this.boletimRepository.alterarBoletim(boletim);
+			}
+			else
+			{
+				throw new Exception("Não foi possível alterar o veículo!");
+			}
 		}
 	}
 
 	@Override
-	public void removerBoletim(String identificador) throws IOException {
+	public void removerBoletim(String identificador) throws Exception {
+		this.veiculoRepository.removerVeiculo(procurarPorIdentificador(identificador).getVeiculoFurtado().getEmplacamento().getCodigo());
 		this.boletimRepository.removerBoletim(identificador);
 	}
 

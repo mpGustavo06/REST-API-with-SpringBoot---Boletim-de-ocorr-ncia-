@@ -17,8 +17,8 @@ import jakarta.annotation.PostConstruct;
 public class BoletimFurtoRepositoryImplementation implements BoletimFurtoRepository 
 {
 	@Autowired
-	CSVLeitor leitor;
-	Map<String, BoletimFurto> memory = new HashMap<>();
+	private CSVLeitor leitor;
+	private Map<String, BoletimFurto> memory = new HashMap<>();
 
 	@PostConstruct
 	public void init() {
@@ -60,8 +60,15 @@ public class BoletimFurtoRepositoryImplementation implements BoletimFurtoReposit
 	}
 
 	@Override
-	public BoletimFurto procurarPorIdentificador(String identificador) {
-		return this.memory.get(identificador);
+	public BoletimFurto procurarPorIdentificador(String identificador) throws IOException {
+		try 
+		{
+			return this.memory.get(identificador);
+		} 
+		catch (Exception e) 
+		{
+			throw new IOException("Não foi possível encontrar o registro!");
+		} 
 	}
 
 	@Override

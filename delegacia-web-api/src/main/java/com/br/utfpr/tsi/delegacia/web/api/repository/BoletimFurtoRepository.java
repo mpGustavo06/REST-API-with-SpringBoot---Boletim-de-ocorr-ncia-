@@ -14,7 +14,7 @@ public interface BoletimFurtoRepository
 	
 	List<BoletimFurto> listarBoletins();
 	
-	BoletimFurto procurarPorIdentificador(String identificador);
+	BoletimFurto procurarPorIdentificador(String identificador) throws IOException;
 	
 	List<BoletimFurto> procurarPorCidade(String cidade);
 	

@@ -91,11 +91,11 @@ public class BoletimEndpoint {
 		try 
 		{
 			boletimFurtoController.cadastrarBoletim(boletim);
-			return Response.ok("Cadastrado com sucesso! Identificador: "+boletim.getIdentificador()).build();
+			return Response.accepted("Cadastrado com sucesso! <br> Identificador: '" + boletim.getIdentificador()+"'").build();
 		} 
 		catch (Exception e) 
 		{
-			return Response.status(Response.Status.NO_CONTENT).entity(e.getMessage()).build();
+			return Response.ok(Response.Status.NO_CONTENT).entity(e.getMessage()).build();
 		}
 	}
 	
@@ -107,11 +107,11 @@ public class BoletimEndpoint {
 		try 
 		{
 			boletimFurtoController.alterarBoletim(boletim);
-			return Response.ok("Alterado com sucesso! Identificador: "+boletim.getIdentificador()).build();
+			return Response.accepted("Boletim: '"+boletim.getIdentificador()+"' alterado com sucesso!").build();
 		} 
 		catch (Exception e) 
 		{
-			return Response.status(Response.Status.NOT_MODIFIED).entity(e.getMessage()).build();
+			return Response.ok(Response.Status.NO_CONTENT).entity(e.getMessage()).build();
 		}
 	}
 	
@@ -121,11 +121,11 @@ public class BoletimEndpoint {
 		try 
 		{
 			boletimFurtoController.removerBoletim(identificador);
-			return Response.ok("Removido com sucesso!").build();
+			return Response.accepted("Boletim: '"+identificador+"' removido com sucesso!").build();
 		} 
 		catch (Exception e) 
 		{
-			return Response.status(Response.Status.NOT_ACCEPTABLE).entity(e.getMessage()).build();
+			return Response.ok(Response.Status.NO_CONTENT).entity(e.getMessage()).build();
 		}
 	}
 }
