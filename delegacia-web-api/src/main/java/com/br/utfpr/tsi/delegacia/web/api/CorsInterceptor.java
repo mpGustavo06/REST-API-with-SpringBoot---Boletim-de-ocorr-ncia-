@@ -11,7 +11,8 @@ import java.util.List;
 public class CorsInterceptor implements ContainerResponseFilter {
    private final Integer corsPreflightMaxAgeInSeconds = 1800;
 
-   public void filter(ContainerRequestContext request, ContainerResponseContext response) throws IOException {
+   @SuppressWarnings({ "unchecked", "rawtypes" })
+public void filter(ContainerRequestContext request, ContainerResponseContext response) throws IOException {
       response.getHeaders().add("Access-Control-Allow-Origin", request.getHeaderString("origin"));
       response.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
       response.getHeaders().add("Access-Control-Allow-Credentials", "true");

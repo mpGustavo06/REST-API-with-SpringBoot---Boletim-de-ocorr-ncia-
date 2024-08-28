@@ -145,6 +145,7 @@ public class ValidatorImplementation implements Validator
 	    return isEmailIdValid;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public boolean verificarData(String data) {
 		String dateFormat = "dd/MM/uuuu";
