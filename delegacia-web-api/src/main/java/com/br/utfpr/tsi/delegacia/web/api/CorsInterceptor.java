@@ -9,22 +9,22 @@ import java.util.List;
 
 @Provider
 public class CorsInterceptor implements ContainerResponseFilter {
-   private final Integer corsPreflightMaxAgeInSeconds = 1800;
+	private final Integer corsPreflightMaxAgeInSeconds = 1800;
 
-   @SuppressWarnings({ "unchecked", "rawtypes" })
-public void filter(ContainerRequestContext request, ContainerResponseContext response) throws IOException {
-      response.getHeaders().add("Access-Control-Allow-Origin", request.getHeaderString("origin"));
-      response.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-      response.getHeaders().add("Access-Control-Allow-Credentials", "true");
-      
-      List<String> allowedHeaders = (List)request.getHeaders().get("Access-Control-Request-Headers");
-      
-      if (allowedHeaders != null) {
-    	  for (String allowedHeader : allowedHeaders) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void filter(ContainerRequestContext request, ContainerResponseContext response) throws IOException {
+		response.getHeaders().add("Access-Control-Allow-Origin", request.getHeaderString("origin"));
+		response.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+		response.getHeaders().add("Access-Control-Allow-Credentials", "true");
+
+		List<String> allowedHeaders = (List) request.getHeaders().get("Access-Control-Request-Headers");
+
+		if (allowedHeaders != null) {
+			for (String allowedHeader : allowedHeaders) {
 				response.getHeaders().add("Access-Control-Allow-Headers", allowedHeader);
-    	  }
-      }
+			}
+		}
 
-      response.getHeaders().add("Access-Control-Max-Age", this.corsPreflightMaxAgeInSeconds);
-   }
+		response.getHeaders().add("Access-Control-Max-Age", this.corsPreflightMaxAgeInSeconds);
+	}
 }
