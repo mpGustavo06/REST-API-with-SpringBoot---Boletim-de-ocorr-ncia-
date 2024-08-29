@@ -14,7 +14,7 @@
 }
 
 #theftTable th {
-    color: rgba(11, 169, 255, 0.692);
+    color:  rgb(20, 165, 255);
     font-size: 20px;
 }
 
@@ -34,7 +34,7 @@
 }
 
 #carTable th {
-    color: rgba(11, 169, 255, 0.692);
+    color:  rgb(20, 165, 255);
     font-size: 20px;
 }
 
@@ -53,9 +53,54 @@
 #boletins,
 #veiculos,
 #registros,
-#alterar,
-#main{
+#alterar{
     background-color: rgb(97, 112, 135);
     height: 100vh;
-    width: 100%;
+    width: 100vw;
+    background-attachment: scroll;
 }
+
+#main .img,
+#boletins .img,
+#veiculos .img,
+#registros .img,
+#alterar .img{
+    height: 45px;
+}
+
+#main .img2,
+#boletins .img2,
+#veiculos .img2,
+#registros .img2,
+#alterar .img2{
+    height: 30px;
+}
+
+#main .back{
+    width: 100vw;
+    height: 100vh;
+    background-image: url(img/backmain.jpg);
+    background-color: rgb(97, 112, 135);;
+    background-size: 100%;
+    background-attachment: fixed;
+    position: fixed;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+
+#main .bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 40%;
+    height: 30%;
+    padding: 20px;
+    text-align: center;
+  }

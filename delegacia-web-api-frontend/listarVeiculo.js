@@ -66,20 +66,17 @@ var listarProcessosFiltro = function () {
                             '</tr>';
                         $("#carTable tbody:last").after(novaLinha);
                     });
+                    document.getElementById('filterValue').value = '';
                 },
                 error: function (xhr, status, error) {
                     $("#message").empty();
                     $("#message").append('Erro ao procurar por '+$(".form-select").val()+': '+$("#filterValue").val()+'!');
+                    document.getElementById('filterValue').value = '';
                 }
             });
         }
     });
 };
-
-var consultar = function (urlContato) {
-    sessionStorage.setItem("urlContato", urlContato);
-    window.location.href = "consulta.html";
-}
 
 var limparTabela = function () {
     $("#carTable").find("tr:gt(0)").remove();

@@ -74,11 +74,13 @@ var listarProcessosFiltro = function () {
                             '</tr>';
                         $("#theftTable tbody:last").after(novaLinha);
                     });
+                    document.getElementById('filterValue').value = '';
                 },
                 error: function (xhr, status, erro) {
                     limparTabela();
                     $("#message").empty();
                     $("#message").append('Erro ao procurar por ' + $(".form-select").val() + ': ' + $("#filterValue").val() + '!');
+                    document.getElementById('filterValue').value = '';
                 }
             });
         }
@@ -98,10 +100,12 @@ var deletarBoletim = function () {
                 $("#message").empty();
                 limparTabela();
                 $("#message").html(removido)
+                document.getElementById('deleteValue').value = '';
             },
             error: function (xhr, status, error) {
                 $("#message").empty();
                 $("#message").append('Não foi possível remover: ' + registro)
+                document.getElementById('deleteValue').value = '';
             }
         });
     });
@@ -121,11 +125,13 @@ var alterarBoletim = function () {
                 $.each(boletins, function (index, bo) {
                     location.href = `alterar.html?identificador=${bo.identificador}&dataOcorrido=${bo.dataOcorrido}&periodoOcorrido=${bo.periodoOcorrido}&crime=${bo.crime}&envolvidos=${bo.envolvidos}&tipo=${bo.veiculoFurtado.tipoVeiculo}&marca=${bo.veiculoFurtado.marca}&cor=${bo.veiculoFurtado.cor}&ano=${bo.veiculoFurtado.anoFabricacao}&envolvidoEm=${bo.veiculoFurtado.envolvidoEm}&placa=${bo.veiculoFurtado.emplacamento.codigo}&cidadePlaca=${bo.veiculoFurtado.emplacamento.cidade}&estadoPlaca=${bo.veiculoFurtado.emplacamento.estado}&rua=${bo.localOcorrido.rua}&numero=${bo.localOcorrido.numero}&bairro=${bo.localOcorrido.bairro}&cidade=${bo.localOcorrido.cidade}&estado=${bo.localOcorrido.estado}`;
                 });
+                document.getElementById('alterValue').value = '';
             },
             error: function (xhr, status, erro) {
                 limparTabela();
                 $("#message").empty();
                 $("#message").append('Erro ao procurar por identificador: '+ $("#alterValue").val() + '!');
+                document.getElementById('alterValue').value = '';
             }
         });
     });
